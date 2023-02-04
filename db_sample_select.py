@@ -1,9 +1,6 @@
 import psycopg2
 
-try:
-    conn = psycopg2.connect("dbname='bug' user='postgres' host='localhost' password='postgres'")
-except:
-    print("I am unable to connect to the database")
+conn = psycopg2.connect("dbname='bug' user='postgres' host='localhost' password='postgres'")
 
 cur = conn.cursor()
 
