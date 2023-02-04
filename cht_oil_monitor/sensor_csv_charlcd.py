@@ -25,8 +25,8 @@ def flow():
                 amplifier = value["board"](value["spi"], value["cs"])
                 temp_c = amplifier.temperature
                 lcd.cursor_position(value["column"], value["row"])
-                lcd.message = "{}:{}".format(value["nickname"], f'{temp_c:.1f}')
-                print(key, f": {temp_c} C")
+                lcd.message = "{}:{}{}".format(value["nickname"], f'{temp_c:.1f}', '\x00')
+                print(key, f": {temp_c}{chr(176)}C")
                 csv_row[key] = temp_c
             except RuntimeError as cyl_rte:
                 print(key, ":", cyl_rte)
