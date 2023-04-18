@@ -1,22 +1,17 @@
-# SPDX-FileCopyrightText: 2021 ladyada for Adafruit Industries
-# SPDX-License-Identifier: MIT
-
+#!/usr/bin/python3
 import time
-
 from amplifier_config import amplifiers
 
 
 def flow():
-    temperatures = []
-    while len(temperatures) < len(amplifiers):
-        for name, value in amplifiers.items():
-            try:
-                amplifier = value["board"](value["spi"], value["cs"])
-                temp_c = amplifier.temperature
-                print(name, ": {} C".format(temp_c))
-            except RuntimeError as cyl_rte:
-                print(name, ":", cyl_rte)
-            time.sleep(1.0)
+    for key, value in amplifiers.items():
+        try:
+            amplifier = value["board"](value["spi"], value["cs"])
+            temp_c = amplifier.temperature
+            print(key, f": {temp_c}{chr(176)}C")
+        except RuntimeError as cyl_rte:
+            print(key, ":", cyl_rte)
+        time.sleep(2.0)
 
 
 while True:
